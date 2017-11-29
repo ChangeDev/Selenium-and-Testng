@@ -229,9 +229,10 @@ input.sendKeys(Keys.ENTER);
 ![bg](D:\Users\TQ-G153\Desktop\se+te\background.png)
 ## **操作Cookie**
 <small>有时候我们需要验证浏览器中 cookie 是否正确，WebDriver 提供了操作 Cookie 的相关方法可以读取、添加和删除 cookie 信息。</small>
+
 |方法|描述|
 |:-:|:-:|
-|getCookies()|获取所有coolie信息|
+|getCookies()|获取所有cookie信息|
 |getCookieNamed()|返回key为"name"的cookie信息|
 |addCookie()|添加cookie|
 |deleteCookieNamed()|删除cookie信息|
