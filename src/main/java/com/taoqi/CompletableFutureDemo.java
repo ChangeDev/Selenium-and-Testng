@@ -9,11 +9,11 @@ import java.util.concurrent.Future;
  * @author: ChangFeng
  * @create: 2018-04-04 15:03
  **/
-public class Demo {
+public class CompletableFutureDemo {
 
 
     public static void main(String[] args) throws Exception {
-        Demo demo = new Demo();
+        CompletableFutureDemo demo = new CompletableFutureDemo();
         Future<Double> priceAsync = demo.getPriceAsync("Mi Mix 2");
         System.out.println("get");
         System.out.println(priceAsync.get());
