@@ -24,8 +24,8 @@ public class StaticDemo {
 
     public static void main(String[] args) {
         StaticDemo staticDemo = StaticDemo.getInstance();
-        System.out.println(staticDemo.c1);
-        System.out.println(staticDemo.c2);
+        System.out.println(c1);
+        System.out.println(c2);
     }
 
 }

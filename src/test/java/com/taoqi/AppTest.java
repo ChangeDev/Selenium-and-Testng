@@ -26,7 +26,7 @@ public class AppTest {
         driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.MILLISECONDS);
         driver.getWindowHandle();
         ((JavascriptExecutor)driver).executeScript("window.alert(\"alert\");");
-        //WebElement element = driver.findElement(By.cssSelector(".extra > a:nth-child(1)"));
+        WebElement element = driver.findElement(By.cssSelector(".extra > a:nth-child(1)"));
         //.sendKeys("Selenium");
         // Thread.sleep(1000);
         //driver.findElement(By.cssSelector("a.mnav:nth-child(3)")).sendKeys(Keys.CONTROL, "w");

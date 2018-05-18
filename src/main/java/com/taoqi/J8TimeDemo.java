@@ -1,11 +1,7 @@
 package com.taoqi;
 
-import java.sql.Date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
-import java.util.TimeZone;
 
 import static java.time.temporal.TemporalAdjusters.*;
 
@@ -15,40 +11,55 @@ import static java.time.temporal.TemporalAdjusters.*;
 public class J8TimeDemo {
 
     public static void main(String[] args) throws Exception {
-        //getToday();
-        //customDate();
-        // getSpecifiedDate();
-        // birthday();
-        // localTime();
-        // clock();
-        // compareDate();
-        // zonedDateTime();
-        // yearMonth();
-        // leapYear();
-        // period();
-        // instant();
-        // dateTimeFormatter1();
-        // dateTimeFormatter2();
-        // dateTimeFormatter3();
-        // duration();
-        temporalAdjuster();
+        dateTimeFormatter();
+    }
+
+    public static void zonedDateTime() {
+        // LocalDateTime LocalDate Instant都可以与ZoneId组合 转换成ZonedDateTime
+        ZonedDateTime zonedDateTime = LocalDate.now().atStartOfDay(ZoneId.systemDefault());
+        ZonedDateTime zonedDateTime1 = LocalDateTime.now().atZone(ZoneId.systemDefault());
+        ZonedDateTime zonedDateTime2 = Instant.now().atZone(ZoneId.systemDefault());
+    }
+
+    public static void dateTimeFormatter() {
+        // DateTimeFormatter是线程安全的
+        // 创建DateTimeFormatter
+        LocalDate localDate = LocalDate.now();
+        // 2014-03-18
+        DateTimeFormatter isoLocalDate = DateTimeFormatter.ISO_LOCAL_DATE;
+        // 20140318
+        DateTimeFormatter basicIsoDate = DateTimeFormatter.BASIC_ISO_DATE;
+        // DateTimeFormatter.BASIC_ISO_DATE
+        DateTimeFormatter.ofPattern("yyyyMMdd");
+        // 也可以通过String和DateTimeFormatter实例直接创建日期、时间对象
+        LocalDate date = LocalDate.parse("20140318", basicIsoDate);
     }
 
     public static void temporalAdjuster() {
         LocalDate localDate = LocalDate.now();
-        LocalDate date0 = localDate.with(dayOfWeekInMonth(1, DayOfWeek.FRIDAY));// 转换成本月的第1个周五
-        LocalDate date = localDate.with(dayOfWeekInMonth(2, DayOfWeek.FRIDAY));// 转换成本月的第1个周五
-        LocalDate date1 = localDate.with(firstDayOfMonth());// 转换成本月的第一天
+        // 将日期转换成本月的第1个周五
+        LocalDate date0 = localDate.with(dayOfWeekInMonth(1, DayOfWeek.FRIDAY));
+        // 将日期转换成本月的第1个周五
+        LocalDate date = localDate.with(dayOfWeekInMonth(2, DayOfWeek.FRIDAY));
+        // 将日期转换成本月的第一天
+        LocalDate date1 = localDate.with(firstDayOfMonth());
+        // 将日期转换成下月的第一天
         System.out.println(localDate.with(firstDayOfNextMonth()));
+        // 将日期转换成明年的第一天
         System.out.println(localDate.with(firstDayOfNextYear()));
+        // 将日期转换成今年的第一天
         System.out.println(localDate.with(firstDayOfYear()));
+        // 将日期转换成本月的第一个周五
         System.out.println(localDate.with(firstInMonth(DayOfWeek.FRIDAY)));
-        System.out.println(localDate.with(firstInMonth(DayOfWeek.FRIDAY)));
+        // 将日期转换成本月的最后一个周五
         System.out.println(localDate.with(lastInMonth(DayOfWeek.FRIDAY)));
+        // 将日期转换成下一个周五
         System.out.println(localDate.with(next(DayOfWeek.FRIDAY)));
+        // 将日期转换成上一个周五
         System.out.println(localDate.with(previous(DayOfWeek.FRIDAY)));
-        System.out.println(localDate);
+        // 将日期转换成下一个周五 如果当前日期就是周五 则不用转换
         System.out.println(localDate.with(nextOrSame(DayOfWeek.FRIDAY)));
+        // 将日期转换成上一个周五  如果当前日期就是周五 则不用转换
         System.out.println(localDate.with(previousOrSame(DayOfWeek.FRIDAY)));
     }
 
@@ -77,91 +88,7 @@ public class J8TimeDemo {
         return duration;
     }
 
-    // get time from str
-    public static void dateTimeFormatter3() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateTimeStr = "2018-02-11";
-        System.out.println(LocalDate.parse(dateTimeStr, formatter));
-    }
-
-    // parse time to str by custom formatter
-    public static void dateTimeFormatter2() {
-        ZonedDateTime now = ZonedDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        System.out.println(formatter.format(now));
-    }
-
-    // parse to,e tp str by default BASIC_ISO_DATE formatter
-    public static void dateTimeFormatter1() {
-        String dayAfterTomorrow = "20140116";
-        LocalDate formatted = LocalDate.parse(dayAfterTomorrow,
-                DateTimeFormatter.BASIC_ISO_DATE);
-        System.out.println(formatted);
-    }
-
-    public static void instant() {
-        Instant instant = Instant.now();
-        System.out.println(instant);
-        System.out.println(Date.from(instant));
-    }
-
-    public static void leapYear() {
-        LocalDate localDate = LocalDate.now();
-        System.out.println(localDate.isLeapYear());
-    }
-
-    public static void yearMonth() {
-        YearMonth currentYearMonth = YearMonth.now();
-        System.out.printf("Days in month year %s: %d%n", currentYearMonth, currentYearMonth.lengthOfMonth());
-        YearMonth creditCardExpiry = YearMonth.of(2018, Month.FEBRUARY);
-        System.out.printf("Your credit card expires on %s %n", creditCardExpiry);
-    }
-
-    public static void zonedDateTime() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        System.out.println(localDateTime);
-        System.out.println(ZonedDateTime.of(localDateTime, TimeZone.getTimeZone("CST").toZoneId()));
-        System.out.println(ZonedDateTime.of(localDateTime, TimeZone.getTimeZone("CTT").toZoneId()));
-    }
-
-    public static void compareDate() {
-        LocalDate earlier = LocalDate.now().minusDays(1);
-        LocalDate later = LocalDate.now();
-        System.out.println(earlier.isBefore(later));
-        System.out.println(earlier.isAfter(later));
-    }
-
-    public static void clock() {
-        Clock clock = Clock.systemUTC();
-        Clock clock1 = Clock.systemDefaultZone();
-        System.out.println(clock);
-        System.out.println(clock1);
-    }
-
-    public static LocalTime localTime() {
-        LocalTime now = LocalTime.now();
-        System.out.println(now);
-        now.plusHours(1);
-        System.out.println(now.plusHours(1));
-        return now;
-    }
-
-    public static MonthDay birthday() {
-        LocalDate dateOfBirth = LocalDate.of(1997, 2, 11);
-        MonthDay birthday = MonthDay.of(dateOfBirth.getMonth(), dateOfBirth.getDayOfMonth());
-        MonthDay monthDay = MonthDay.now();
-        System.out.println(birthday.equals(monthDay));
-        return monthDay;
-    }
-
-    public static LocalDate getSpecifiedDate() {
-        LocalDate specifiedDay = LocalDate.of(2018, 2, 11);
-        System.out.println(specifiedDay);
-        System.out.println(specifiedDay.plus(1, ChronoUnit.WEEKS));
-        return specifiedDay;
-    }
-
-    public static LocalDate getToday() {
+    public static LocalDate getLocalDate() {
         LocalDate today = LocalDate.now();
         System.out.println(today);
         System.out.println(today.getYear());
@@ -172,6 +99,7 @@ public class J8TimeDemo {
     }
 
     public static LocalDate customDate() {
+        // 获取2014年3月18号的日期
         LocalDate localDate = LocalDate.of(2014, 3, 18);
         System.out.println(localDate.getYear());
         System.out.println(localDate.getMonth());
@@ -181,6 +109,7 @@ public class J8TimeDemo {
         System.out.println(localDate.getDayOfYear());
         System.out.println(localDate.lengthOfMonth());
         System.out.println(localDate.lengthOfYear());
+        // 是否为闰年
         System.out.println(localDate.isLeapYear());
         return localDate;
     }
