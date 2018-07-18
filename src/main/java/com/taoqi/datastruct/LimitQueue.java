@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.datastruct;
 
 import java.util.Collection;
 import java.util.Iterator;

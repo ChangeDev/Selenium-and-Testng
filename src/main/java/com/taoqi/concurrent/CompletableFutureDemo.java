@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.concurrent;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -23,7 +23,7 @@ public class CompletableFutureDemo {
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();
         new Thread(() -> {
             long start = System.currentTimeMillis();
-            System.out.println("cll getPrice method");
+            System.out.println("call getPrice method");
             double price = this.getPrice(product);
             System.out.println("call getPrice method cost:" + (System.currentTimeMillis() - start) + "ms");
             futurePrice.complete(price);

@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.util;
 
 import java.io.*;
 import java.net.*;
@@ -28,8 +28,8 @@ public class HttpDownloader {
     private final int MIN_SIZE = 2 << 20;
 
     public static void main(String[] args) throws IOException {
-        String url = "https://github.com/appium/appium-desktop/releases/download/v1.2.6/appium-desktop-Setup-1.2.6.exe";
-        new HttpDownloader(url, "D:/appium-desktop-Setup-1.2.6.exe", 5, 5000).get();
+        String url = "https://www.typora.io/windows/typora-setup-x64.exe";
+        new HttpDownloader(url, "D:/typora-setup-x64.exe", 10, 5000).get();
     }
 
     public HttpDownloader(String Url, String localPath) throws MalformedURLException {

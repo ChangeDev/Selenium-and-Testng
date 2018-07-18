@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.java8;
 
 import lombok.Data;
 
@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.LongStream;

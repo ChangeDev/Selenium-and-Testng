@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.util;
 
 /**
  * Created by TQ-G153 on 2017/12/5.

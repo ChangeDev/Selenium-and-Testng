@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.util;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

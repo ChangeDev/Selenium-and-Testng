@@ -1,4 +1,4 @@
-package com.taoqi;
+package com.taoqi.java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
